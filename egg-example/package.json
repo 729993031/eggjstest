@@ -1,0 +1,60 @@
+{
+  "name": "jsonTry",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "egg": "^2.2.1",
+    "egg-jwt": "^3.0.0",
+    "egg-mysql": "^3.0.0",
+    "egg-scripts": "^2.5.0",
+    "egg-static": "^2.1.1",
+    "egg-view-nunjucks": "^2.2.0",
+    "mysql2": "^1.5.3",
+    "node-rsa": "^1.0.0"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-cors": "^2.0.0",
+    "egg-mock": "^3.14.0",
+    "egg-sequelize": "^3.1.4",
+    "egg-validate": "^1.0.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^6.0.0",
+    "node-uuid": "^1.4.8",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-jsonTry",
+    "stop": "egg-scripts stop --title=egg-server-jsonTry",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod",
+    "migrate:new": "egg-sequelize migration:create",
+    "migrate:up": "egg-sequelize db:migrate",
+    "migrate:down": "egg-sequelize db:migrate:undo"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT"
+}
