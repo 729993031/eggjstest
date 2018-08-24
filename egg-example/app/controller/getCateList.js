@@ -2,8 +2,9 @@ const Controller = require('egg').Controller;
 
 class GetCateList extends Controller{
     async index(){
-        const ctx = this.ctx;
-        const result = await  ctx.curl('http://m.you.163.com/item/cateList?categoryId=1005000',{
+        const {ctx, service} = this;
+        /*ctx.header = {'Access-Control-Allow-Origin':' *'};*/
+        const result=await service.requestCache.judge('http://m.you.163.com/item/cateList?categoryId=1005000',{
             headers:{
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                 'Accept-Encoding': 'gzip, deflate',
@@ -17,7 +18,6 @@ class GetCateList extends Controller{
             timeout: [ 10000, 10000 ],
         });
 
-        const list = result.data;
         /*
         因为送过来的数据有的列表和旧的列表
         ，但是新的列表中之前的列表没有子项但有横幅的URL
@@ -25,11 +25,11 @@ class GetCateList extends Controller{
         所以先遍历新的列表中的已含有的旧的
         列表的图片到旧列表中然后取新添加的列表项和旧的列表项相加
          */
-        const gapLength = list.data.categoryL1List.length-list.global.cateList.length;
-        const oldList = list.global.cateList.slice();
-        const newList = list.data.categoryL1List.slice(0,gapLength);
+        const gapLength = result.data.categoryL1List.length-result.global.cateList.length;
+        const oldList = result.global.cateList.slice();
+        const newList = result.data.categoryL1List.slice(0,gapLength);
         oldList.map((value, index) =>
-            value.wapBannerUrl = list.data.categoryL1List[index+gapLength].wapBannerUrl
+            value.wapBannerUrl = result.data.categoryL1List[index+gapLength].wapBannerUrl
         );
         ctx.set('Cache-Control','max-age=3000');
         return ctx.body = {
