@@ -4,10 +4,10 @@
  */
 module.exports = app => {
     const { router, controller } = app;
-    router.resources('163','/163',controller.getIndexJson);
-    router.resources('456','/test/*',controller.index);
+    router.resources('163','/index',controller.getIndexJson);
     router.resources('item-detail','/item/detail',controller.getItemDetail);
     router.resources('category','/category',controller.getCategoryId);
+    router.resources('category','/subCategory',controller.getSubCategoryId);
     router.resources('hotList','/hot_list',controller.getHotList);
     router.resources('host_port','/host_port',controller.getHotspot);
     router.resources('commentTags','/commentTags',controller.commentTags);
@@ -19,5 +19,6 @@ module.exports = app => {
     router.resources('createUser','/register',controller.createUser);
     router.resources('createUser','/login',controller.login);
     router.resources('itemGoodRates','/item_good_rates',controller.gooRates);
-    router.delete('/posts/:id',controller.userQuit.destroy)
+    router.delete('/posts/:id',controller.userQuit.destroy);
+    router.resources('456','/*',controller.index);
 };
