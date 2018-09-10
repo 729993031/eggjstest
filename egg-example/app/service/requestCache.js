@@ -15,15 +15,15 @@ class RequestCache extends Service{
     }) {
         const {ctx,service} = this;
         const findCache = await service.addressCache.cacheFind(address);
-        if(findCache.find===false){
+        if(findCache.find===false){//没找到缓存库地址就重新请求一个
             const result = await  ctx.curl(address,parameter);
             await service.addressCache.createCache(address,result.data);
             return result.data;
         }
         const timeDifference = await service.addressCache.different(findCache.updated_at);
-        if(timeDifference.update){
+        if(timeDifference.update){//更新时间为5分钟，如果判断时间到了就重新更新
             try {
-                const result = await  ctx.curl(address,parameter);
+                const result = await ctx.curl(address, parameter);
                 await service.addressCache.updateCache(address, result.data, {
                     where: {
                         address: address

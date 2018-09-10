@@ -22,12 +22,15 @@ module.exports = appInfo => {
     enableDNSCache : true,
     dnsCacheLookupInterval: 10000,
   };
+
   // add your config here
   config.middleware = [];
 
   config.security = {
       enable: false,
   };
+
+
   config.sequelize = {
         // 数据库类型
         dialect: "postgres",
