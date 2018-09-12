@@ -13,7 +13,7 @@ class ManufacturerItems extends Controller {
       sortType,
       upperPrice
     } = ctx.query;
-    return (ctx.body = await service.addressCache.cacheFind(
+    return (ctx.body = await service.requestCache.judge(
       `http://m.you.163.com/xhr/manufacturer/items.json?tagId=${tagId}&page=${page}&size=${size}&sortType=${sortType}&descSorted=${descSorted}&floorPrice=${floorPrice}&upperPrice=${upperPrice}&categoryId=${categoryId}`
     ));
   }

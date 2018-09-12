@@ -29,9 +29,7 @@ module.exports = appInfo => {
   config.security = {
       enable: false,
   };
-
-
-  config.sequelize = {
+    config.sequelize = {
         // 数据库类型
         dialect: "postgres",
         // host
@@ -44,7 +42,7 @@ module.exports = appInfo => {
         password: "8135472",
         // 数据库名
         database: "postgres",
-  };
+    };
   config.security = {
       csrf: {
           enable:false,
